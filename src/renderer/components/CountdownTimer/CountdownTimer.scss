@@ -10,16 +10,17 @@
   }
 
   &.rest-mode {
-    color: green;
+    color: #8bc34a;
   }
 
   .output {
     font-family: monospace;
-    font-size: 120px;
+    font-size: 150px;
+    letter-spacing: 0.1em;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 0.2em;
   }
 }

@@ -1,7 +1,6 @@
 :root {
-  --color-dark: #101010;
+  --color-dark: #1a1a1a;
   --color-light: #fafafa;
-  --color-primary: #ff6f00;
 }
 
 body {
@@ -12,8 +11,17 @@ body {
   margin: 0;
 }
 
+@keyframes gradation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
 a {
-  color: var(--color-primary);
+  color: var(--color-light);
   text-decoration: none;
 }
 

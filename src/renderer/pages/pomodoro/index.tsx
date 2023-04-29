@@ -35,7 +35,7 @@ export default function PomodoroPage() {
   return (
     <div id="pomodoro-page" className="page">
       <Link to="/" className="back-link">
-        Back
+        &lt;
       </Link>
       <CountdownTimer />
     </div>
