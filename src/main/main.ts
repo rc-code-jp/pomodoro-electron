@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, globalShortcut } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -127,6 +127,16 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
+    // キーボードショートカットの登録
+    const ret = globalShortcut.register('Command+Control+P', () => {
+      console.log('Command+Control+P is pressed');
+      mainWindow?.webContents.send('on-pause');
+    });
+
+    if (!ret) {
+      console.log('registration failed');
+    }
+
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
@@ -135,3 +145,8 @@ app
     });
   })
   .catch(console.log);
+
+app.on('will-quit', () => {
+  // すべてのショートカットを登録解除
+  globalShortcut.unregisterAll();
+});

@@ -32,6 +32,10 @@ export default function PomodoroPage() {
     };
   }, [keyboardEventHandler]);
 
+  window.electron.ipcRenderer.on('on-pause', () => {
+    setPause(!pause);
+  });
+
   return (
     <div id="pomodoro-page" className="page">
       <Link to="/" className="back-link">
