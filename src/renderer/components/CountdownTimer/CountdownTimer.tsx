@@ -1,5 +1,5 @@
-import { usePauseAtom, useTimeAtom } from '@/state/timer';
-import { useEffect } from 'react';
+import { usePauseAtom, useRestModeAtom, useTimeAtom } from '@/state/timer';
+import { useCallback, useEffect } from 'react';
 import './CountdownTimer.scss';
 
 // ゼロ埋め
@@ -14,6 +14,20 @@ export default function CountdownTimer() {
   // 一時停止フラグ
   const [pause] = usePauseAtom();
 
+  // 休憩フラグ
+  const [isRestMode, setRestMode] = useRestModeAtom();
+
+  // モード切り替え
+  const changeMode = useCallback(() => {
+    if (isRestMode) {
+      setRestMode(false);
+      setTime(60 * 25);
+    } else {
+      setRestMode(true);
+      setTime(60 * 5);
+    }
+  }, [isRestMode, setRestMode, setTime]);
+
   // マウント時にタイマーを開始する
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -22,19 +36,27 @@ export default function CountdownTimer() {
       if (time - 1 >= 0) {
         // カウントダウン
         setTime(time - 1);
+      } else {
+        // モード切り替え
+        changeMode();
       }
     }, 1000);
 
     // アンマウント時にタイマーをクリアする
     return () => clearInterval(timerId);
-  }, [pause, setTime, time]);
+  }, [pause, setTime, time, isRestMode, setRestMode, changeMode]);
 
   const hour = Math.floor(time / 3600);
   const minutes = Math.floor((time - hour * 3600) / 60);
   const seconds = time - hour * 3600 - minutes * 60;
 
   return (
-    <div className="countdown-timer">
+    <div
+      className={`
+      countdown-timer
+      ${pause ? 'pause' : ''}
+      ${isRestMode ? 'rest-mode' : ''}`}
+    >
       <output className="output">
         <span>{pad(hour)}</span>
         <span>:</span>
