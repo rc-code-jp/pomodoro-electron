@@ -1,0 +1,14 @@
+#pomodoro-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .back-link {
+    display: flex;
+    position: fixed;
+    top: 0.5em;
+    left: 0.5em;
+    font-size: 15px;
+  }
+}

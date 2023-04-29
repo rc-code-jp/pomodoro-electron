@@ -1,3 +1,16 @@
 .countdown-timer {
-  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .output {
+    font-family: monospace;
+    font-size: 120px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
 }

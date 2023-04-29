@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import StartButton from '@/components/StartButton/StartButton';
+import './index.scss';
 
 export default function IndexPage() {
   return (
-    <div>
-      <div>index</div>
-      <Link to="/pomodoro">Start</Link>
+    <div id="index-page">
+      <StartButton />
     </div>
   );
 }
