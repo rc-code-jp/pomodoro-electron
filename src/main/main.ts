@@ -9,7 +9,14 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain, globalShortcut } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  shell,
+  ipcMain,
+  globalShortcut,
+  Tray,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -25,10 +32,16 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
+let tray: Tray | null = null;
+
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('change-status', async (_event, arg) => {
+  tray?.setTitle(arg[0]);
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -68,6 +81,9 @@ const createWindow = async () => {
   const getAssetPath = (...paths: string[]): string => {
     return path.join(RESOURCES_PATH, ...paths);
   };
+
+  tray = new Tray(getAssetPath('blank.png'));
+  tray?.setTitle('up...');
 
   mainWindow = new BrowserWindow({
     show: false,

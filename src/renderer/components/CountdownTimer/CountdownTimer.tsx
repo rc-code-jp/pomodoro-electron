@@ -24,12 +24,12 @@ export default function CountdownTimer() {
       // Work mode
       setRestMode(false);
       setTime(60 * 25);
-      notificationBody = 'Work mode now';
+      notificationBody = 'Work ...';
     } else {
       // Rest mode
       setRestMode(true);
       setTime(60 * 5);
-      notificationBody = 'Rest mode now';
+      notificationBody = 'Rest ...';
     }
 
     // 通知

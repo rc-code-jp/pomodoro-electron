@@ -19,6 +19,9 @@ export default function StartButton() {
         console.log('click notification');
       };
 
+    // ステータス変更
+    window.electron.ipcRenderer.sendMessage('change-status', ['start']);
+
     // タイマー画面に遷移
     navigate('/pomodoro');
   };

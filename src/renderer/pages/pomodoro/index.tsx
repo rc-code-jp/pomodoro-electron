@@ -9,6 +9,18 @@ export default function PomodoroPage() {
   // 一時停止フラグ
   const [pause, setPause] = usePauseAtom();
 
+  const togglePause = useCallback(() => {
+    if (pause) {
+      setPause(false);
+      // ステータス変更
+      window.electron.ipcRenderer.sendMessage('change-status', ['start']);
+    } else {
+      setPause(true);
+      // ステータス変更
+      window.electron.ipcRenderer.sendMessage('change-status', ['pause']);
+    }
+  }, [pause, setPause]);
+
   const keyboardEventHandler = useCallback(
     (event: KeyboardEvent) => {
       // エスケープで戻る
@@ -18,10 +30,10 @@ export default function PomodoroPage() {
 
       // スペースキーで一時停止の切り替え
       if (event.key === ' ') {
-        setPause(!pause);
+        togglePause();
       }
     },
-    [navigate, pause, setPause]
+    [navigate, togglePause]
   );
 
   useEffect(() => {
@@ -34,7 +46,7 @@ export default function PomodoroPage() {
 
   // 一時停止ショートカット検知
   window.electron.ipcRenderer.on('on-pause', () => {
-    setPause(!pause);
+    togglePause();
   });
 
   return (
