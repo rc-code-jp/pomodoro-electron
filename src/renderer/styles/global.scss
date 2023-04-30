@@ -9,14 +9,25 @@ body {
   color: var(--color-light);
   user-select: none;
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  // グラデーション背景
+  background: linear-gradient(45deg, #89c4ff, #ff8989);
+  background-size: 600% 600%;
+  animation: GradientBackground 30s ease infinite;
 }
 
-@keyframes gradation {
+@keyframes GradientBackground {
   0% {
-    background-position: 0% 0%;
+    background-position: 0% 50%;
   }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
   100% {
-    background-position: 100% 100%;
+    background-position: 0% 50%;
   }
 }
 
