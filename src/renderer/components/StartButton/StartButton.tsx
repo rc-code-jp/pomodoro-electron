@@ -12,6 +12,14 @@ export default function StartButton() {
     setTime(60 * 25); // 25分
     setPause(false);
     setRestMode(false);
+
+    // 通知
+    new Notification('Start timer', { body: 'Start timer ...' }).onclick =
+      () => {
+        console.log('click notification');
+      };
+
+    // タイマー画面に遷移
     navigate('/pomodoro');
   };
 

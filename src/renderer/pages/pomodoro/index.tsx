@@ -32,6 +32,7 @@ export default function PomodoroPage() {
     };
   }, [keyboardEventHandler]);
 
+  // 一時停止ショートカット検知
   window.electron.ipcRenderer.on('on-pause', () => {
     setPause(!pause);
   });

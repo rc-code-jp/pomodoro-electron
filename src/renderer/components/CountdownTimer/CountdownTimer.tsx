@@ -19,13 +19,24 @@ export default function CountdownTimer() {
 
   // モード切り替え
   const changeMode = useCallback(() => {
+    let notificationBody = '';
     if (isRestMode) {
+      // Work mode
       setRestMode(false);
       setTime(60 * 25);
+      notificationBody = 'Work mode now';
     } else {
+      // Rest mode
       setRestMode(true);
       setTime(60 * 5);
+      notificationBody = 'Rest mode now';
     }
+
+    // 通知
+    new Notification('Change mode', { body: notificationBody }).onclick =
+      () => {
+        console.log('click notification');
+      };
   }, [isRestMode, setRestMode, setTime]);
 
   // マウント時にタイマーを開始する

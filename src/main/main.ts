@@ -127,7 +127,7 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
-    // キーボードショートカットの登録
+    // キーボードショートカットの登録1
     const ret = globalShortcut.register('Command+Control+P', () => {
       console.log('Command+Control+P is pressed');
       mainWindow?.webContents.send('on-pause');
