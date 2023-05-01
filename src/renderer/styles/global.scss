@@ -12,9 +12,9 @@ body {
   width: 100vw;
   height: 100vh;
   // グラデーション背景
-  background: linear-gradient(45deg, #89c4ff, #ff8989);
+  background: linear-gradient(45deg, #e4007f, #00a1e9);
   background-size: 600% 600%;
-  animation: GradientBackground 30s ease infinite;
+  animation: GradientBackground 10s ease infinite;
 }
 
 @keyframes GradientBackground {
