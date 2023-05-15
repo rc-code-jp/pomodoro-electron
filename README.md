@@ -13,10 +13,10 @@ npm run start
 ## package
 
 ```bash
+# auto platform
 npm run package
 
-# or
-
+# select platform
 npm run package -- --mac
 ```
 
