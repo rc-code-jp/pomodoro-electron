@@ -1,4 +1,5 @@
 import CountdownTimer from '@/components/CountdownTimer/CountdownTimer';
+import ShortcutHelp from '@/components/ShortcutHelp/ShortcutHelp';
 import { usePauseAtom } from '@/state/timer';
 import { useCallback, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -45,7 +46,7 @@ export default function PomodoroPage() {
   }, [keyboardEventHandler]);
 
   // 一時停止ショートカット検知
-  window.electron.ipcRenderer.on('on-pause', () => {
+  window.electron.ipcRenderer.on('toggle-pause', () => {
     togglePause();
   });
 
@@ -55,6 +56,7 @@ export default function PomodoroPage() {
         &lt;
       </Link>
       <CountdownTimer />
+      <ShortcutHelp />
     </div>
   );
 }
